@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\TaskCollection;
-use App\Task;
+use App\Http\Resources\TaskResource;
+use App\Http\Requests\TaskRequest;
+
 use Illuminate\Http\Request;
+
+use App\Task;
 
 class TaskController extends Controller
 {
@@ -34,9 +38,16 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TaskRequest $request)
     {
-        //
+        $task = new Task;
+        $task->title = $request->title;
+        $task->body = $request->body;
+        $task->save();
+
+        return response([
+            'data' => new TaskResource($task)
+        ], 201);
     }
 
     /**
@@ -47,18 +58,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Task  $task
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Task $task)
-    {
-        //
+        return new TaskResource($task);
     }
 
     /**
@@ -68,9 +68,13 @@ class TaskController extends Controller
      * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Task $task)
+    public function update(TaskRequest $request, Task $task)
     {
-        //
+        $task->update($request->all());
+
+        return response([
+            'data' => new TaskResource($task)
+        ], 201);
     }
 
     /**
@@ -81,6 +85,8 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        $task->delete();
+
+        return response(null, 204);
     }
 }
