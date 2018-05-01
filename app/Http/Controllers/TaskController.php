@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\TasksNotBelongsToUser;
 use App\Http\Resources\TaskCollection;
 use App\Http\Resources\TaskResource;
 use App\Http\Requests\TaskRequest;
@@ -9,9 +10,15 @@ use App\Http\Requests\TaskRequest;
 use Illuminate\Http\Request;
 
 use App\Task;
+use Auth;
 
 class TaskController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,16 +27,6 @@ class TaskController extends Controller
     public function index()
     {
         return TaskCollection::collection(Task::paginate(20));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -88,5 +85,13 @@ class TaskController extends Controller
         $task->delete();
 
         return response(null, 204);
+    }
+
+    public function  tasksUserCheck($task)
+    {
+        if (Auth::id() !== $task->user_id)
+        {
+            throw new TasksNotBelongsToUser;
+        }
     }
 }

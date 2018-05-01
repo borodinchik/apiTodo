@@ -2,9 +2,16 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Task::class, function (Faker $faker) {
+use App\Task;
+use App\User;
+
+$factory->define(Task::class, function (Faker $faker) {
     return [
         'title' => $faker->text(50),
         'body' => $faker->paragraph,
+        'user_id' => function()
+        {
+            return User::all()->random();
+        }
     ];
 });
