@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TaskCollection;
 use App\Task;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        return TaskCollection::collection(Task::paginate(20));
     }
 
     /**
