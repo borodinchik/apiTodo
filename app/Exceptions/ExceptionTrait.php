@@ -6,34 +6,32 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Whoops\Exception\ErrorException;
 
 trait ExceptionTrait
 {
-    public function apiException($request, $e)
+    public function apiResponseException($request, $e)
     {
-        if ($this->isModel($e)) {
-            return $this->modelResponse($e);
-        }
-
-        if($this->isTokenInvalid($e))
+        switch ($e)
         {
-            return $this->TokenInvalidResponse($e);
-        }
+            case $this->isModel($e):
+                return $this->modelResponse($e);
 
-        elseif ($this->isTokenExpired($e))
-        {
-            return $this->TokenExpiredResponse($e);
-        }
+            case $this->isError($e):
+                return $this->ErrorResponse($e);
 
-        elseif ($this->isTokenJWT($e))
-        {
-            return $this->JWTResponse($e);
-        }
+            case $this->isHttp($e):
+                return $this->httpResponse($e);
 
-        if ($this->isHttp($e)) {
-            return $this->httpResponse($e);
+            case $this->isTokenJWT($e):
+                return $this->JWTResponse($e);
+
+            case $this->isTokenInvalid($e):
+                return $this->TokenInvalidResponse($e);
+
+            case $this->isTokenExpired($e):
+                return $this->TokenExpiredResponse($e);
         }
-        return parent::render($request, $e);
     }
 /*Exception function*/
     protected function isModel($e)
@@ -61,11 +59,16 @@ trait ExceptionTrait
         return $e instanceof JWTException;
     }
 
+    protected function isError($e)
+    {
+        return $e instanceof ErrorException;
+    }
+
     /*Response Function*/
     protected function modelResponse($e)
     {
         return response()->json([
-            'error' => 'Product Model not found'
+            'error' => 'Task Model not found'
         ], 404);
     }
 
@@ -95,5 +98,12 @@ trait ExceptionTrait
         return response()->json([
             'error' => 'There is problem with your token'
         ], 400);
+    }
+
+    protected function ErrorResponse($e)
+    {
+        return response()->json([
+            'error' => 'Internal Server Error'
+        ], 500);
     }
 }

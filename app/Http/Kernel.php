@@ -19,6 +19,8 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
+//        \Barryvdh\Cors\HandleCors::class
+
     ];
 
     /**
@@ -58,7 +60,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'jwt' => \App\Http\Middleware\JWT::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'header.api' => \App\Http\Middleware\API::class,
 
     ];
 }

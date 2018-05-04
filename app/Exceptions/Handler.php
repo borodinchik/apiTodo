@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Whoops\Exception\ErrorException;
 
 class Handler extends ExceptionHandler
 {
@@ -51,7 +52,7 @@ class Handler extends ExceptionHandler
     {
         if ($request->expectsJson())
         {
-            return $this->apiException($request, $exception);
+            return $this->apiResponseException($request, $exception);
         }
 
         return parent::render($request, $exception);
