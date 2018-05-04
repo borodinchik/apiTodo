@@ -12,13 +12,9 @@ trait ExceptionTrait
 {
     public function apiResponseException($request, $e)
     {
-        switch ($e)
-        {
+        switch ($e) {
             case $this->isModel($e):
                 return $this->modelResponse($e);
-
-            case $this->isError($e):
-                return $this->ErrorResponse($e);
 
             case $this->isHttp($e):
                 return $this->httpResponse($e);
@@ -31,6 +27,9 @@ trait ExceptionTrait
 
             case $this->isTokenExpired($e):
                 return $this->TokenExpiredResponse($e);
+                break;
+
+                return parent::render($request, $e);
         }
     }
 /*Exception function*/
@@ -59,10 +58,10 @@ trait ExceptionTrait
         return $e instanceof JWTException;
     }
 
-    protected function isError($e)
-    {
-        return $e instanceof ErrorException;
-    }
+//    protected function isError($e)
+//    {
+//        return $e instanceof ErrorException;
+//    }
 
     /*Response Function*/
     protected function modelResponse($e)
@@ -98,12 +97,5 @@ trait ExceptionTrait
         return response()->json([
             'error' => 'There is problem with your token'
         ], 400);
-    }
-
-    protected function ErrorResponse($e)
-    {
-        return response()->json([
-            'error' => 'Internal Server Error'
-        ], 500);
     }
 }
