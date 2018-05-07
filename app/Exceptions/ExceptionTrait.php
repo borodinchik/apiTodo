@@ -6,93 +6,87 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\JWTException;
-use Whoops\Exception\ErrorException;
 
 trait ExceptionTrait
 {
-    public function apiResponseException($request, $e)
+    public function apiResponseException($request, $exception)
     {
-        switch ($e) {
-            case $this->isModel($e):
-                return $this->modelResponse($e);
+        switch ($exception) {
+            case $this->isModel($exception):
+                return $this->modelResponse($exception);
 
-            case $this->isHttp($e):
-                return $this->httpResponse($e);
+            case $this->isHttp($exception):
+                return $this->httpResponse($exception);
 
-            case $this->isTokenJWT($e):
-                return $this->JWTResponse($e);
+            case $this->isTokenJWT($exception):
+                return $this->JWTResponse($exception);
 
-            case $this->isTokenInvalid($e):
-                return $this->TokenInvalidResponse($e);
+            case $this->isTokenInvalid($exception):
+                return $this->TokenInvalidResponse($exception);
 
-            case $this->isTokenExpired($e):
-                return $this->TokenExpiredResponse($e);
-                break;
+            case $this->isTokenExpired($exception):
+                return $this->TokenExpiredResponse($exception);
 
-                return parent::render($request, $e);
         }
+                return parent::render($request, $exception);
     }
 /*Exception function*/
-    protected function isModel($e)
+    protected function isModel($exception)
     {
-        return $e instanceof ModelNotFoundException;
+        return $exception instanceof ModelNotFoundException;
     }
 
-    protected function isHttp($e)
+    protected function isHttp($exception)
     {
-        return $e instanceof NotFoundHttpException;
+        return $exception instanceof NotFoundHttpException;
     }
 
-    protected function isTokenInvalid($e)
+    protected function isTokenInvalid($exception)
     {
-        return $e instanceof TokenInvalidException;
+        return $exception instanceof TokenInvalidException;
     }
 
-    protected function isTokenExpired($e)
+    protected function isTokenExpired($exception)
     {
-        return $e instanceof TokenExpiredException;
+        return $exception instanceof TokenExpiredException;
     }
 
-    protected function isTokenJWT($e)
+    protected function isTokenJWT($exception)
     {
-        return $e instanceof JWTException;
+        return $exception instanceof JWTException;
     }
 
-//    protected function isError($e)
-//    {
-//        return $e instanceof ErrorException;
-//    }
 
     /*Response Function*/
-    protected function modelResponse($e)
+    protected function modelResponse($exception)
     {
         return response()->json([
             'error' => 'Task Model not found'
         ], 404);
     }
 
-    protected function httpResponse($e)
+    protected function httpResponse($exception)
     {
         return response()->json([
             'error' => 'Incorrect route'
         ], 404);
     }
 
-    protected function TokenInvalidResponse($e)
+    protected function TokenInvalidResponse($exception)
     {
         return response()->json([
             'error' => 'Token is Invalid'
         ], 400);
     }
 
-    protected function TokenExpiredResponse($e)
+    protected function TokenExpiredResponse($exception)
     {
         return response()->json([
             'error' => 'Token is Expired'
         ], 400);
     }
 
-    protected function JWTResponse($e)
+    protected function JWTResponse($exception)
     {
         return response()->json([
             'error' => 'There is problem with your token'
