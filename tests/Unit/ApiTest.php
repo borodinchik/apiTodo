@@ -64,7 +64,7 @@ class ApiTest extends TestCase
         $response = $this->withHeaders([
         'Accept' => 'application/json',
         'Content-type'=> 'application/json'
-        ])->json('PUT', '/api/task/13', $data);
+        ])->json('PUT', '/api/task/17', $data);
 
     $response->assertStatus(201);
 
@@ -75,7 +75,7 @@ class ApiTest extends TestCase
         $response = $this->withHeaders([
             'Accept' => 'application/json',
             'Content-type'=> 'application/json'
-        ])->json('DELETE', '/api/task/13');
+        ])->json('DELETE', '/api/task/17');
 
         $response->assertStatus(204);
     }

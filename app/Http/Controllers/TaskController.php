@@ -82,12 +82,4 @@ class TaskController extends Controller
 
         return response(null, 204);
     }
-
-    public function  tasksUserCheck($task)
-    {
-        if (Auth::id() !== $task->user_id)
-        {
-            throw new TasksNotBelongsToUser;
-        }
-    }
 }
