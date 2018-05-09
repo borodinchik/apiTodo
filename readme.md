@@ -59,27 +59,42 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 Manual for work with apiTodo
 
-#Before contacting with links(url), you need to register, or
-#use Laravel API Authentication(Passport)
-https://laravel.com/docs/5.5/passport
+#Install apiTodo and Setting
 
-#If you want to create your registration , login page use these routes
+* git clone https://github.com/borodinchik/apiTodo.git
 
-http://your-doman-name/register - method:post create new user
+after how you installing use this command in your terminal:
 
-http://your-doman-name/logout - method:post create new user
+* composer install
 
-http://your-doman-name/login - method:get login user
+next step you need rename .env.exemple like that .env , and change 3 lines :
+   * DB_DATABASE=your-database
+   * DB_USERNAME=your-user-name-in-database
+   * DB_PASSWORD=your-user-password-in-database
 
+Also you need generate kye from your app:
 
+  * php artisan key:generate
+  
+  
+Now we need migrating and seeding databases:
+
+  * php artisan migrate --seed
+  
+Use JWT:
+
+   * php artisan jwt:secret  
+
+  
 #Route with task
 
-http://your-doman-name/api/task - method:get all tasks
+  * api/task - method:get all tasks
 
-http://your-doman-name/api/task/id - method:get tasks with unique id
+  * api/task/id - method:get tasks with unique id
 
-http://your-doman-name/api/task - method:post create new tasks
+  * api/task - method:post create new tasks
 
-http://your-doman-name/api/task/id - method:update tasks with unique id
+  * api/task/id - method:update tasks with unique id
 
-http://your-doman-name/api/task/id - method:destroy tasks with unique id
+  * api/task/id - method:destroy tasks with unique id
+  
