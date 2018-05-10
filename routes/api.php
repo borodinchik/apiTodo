@@ -26,5 +26,5 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
     Route::post('payload', 'AuthController@payload');
-
 });
+    Route::post('register_user', 'AuthController@register');

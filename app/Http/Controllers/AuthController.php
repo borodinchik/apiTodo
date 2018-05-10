@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
+use App\Http\Resources\UserResource;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class AuthController extends Controller
 {
@@ -14,6 +18,19 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware('jwt', ['except' => ['login']]);
+    }
+
+    public  function register(UserRequest $request)
+    {
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        return response([
+            'data' => new UserResource($user)
+        ], Response::HTTP_CREATED);
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php
 namespace App\Exceptions;
+use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -39,6 +40,7 @@ trait ExceptionTrait
     protected function isHttp($exception)
     {
         return $exception instanceof NotFoundHttpException;
+//        return $exception instanceof \HttpException;
     }
 
     protected function isTokenInvalid($exception)
@@ -62,34 +64,34 @@ trait ExceptionTrait
     {
         return response()->json([
             'error' => 'Task Model not found'
-        ], 404);
+        ], Response::HTTP_NOT_FOUND);
     }
 
     protected function httpResponse($exception)
     {
         return response()->json([
             'error' => 'Incorrect route'
-        ], 404);
+        ],Response::HTTP_NOT_FOUND);
     }
 
     protected function TokenInvalidResponse($exception)
     {
         return response()->json([
             'error' => 'Token is Invalid'
-        ], 400);
+        ], Response::HTTP_BAD_REQUEST);
     }
 
     protected function TokenExpiredResponse($exception)
     {
         return response()->json([
             'error' => 'Token is Expired'
-        ], 400);
+        ], Response::HTTP_BAD_REQUEST);
     }
 
     protected function JWTResponse($exception)
     {
         return response()->json([
             'error' => 'There is problem with your token'
-        ], 400);
+        ], Response::HTTP_BAD_REQUEST);
     }
 }

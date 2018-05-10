@@ -11,9 +11,14 @@ use Illuminate\Http\Request;
 
 use App\Task;
 use Auth;
+use Illuminate\Http\Response;
 
 class TaskController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
 
     /**
      * Display a listing of the resource.
@@ -40,7 +45,7 @@ class TaskController extends Controller
 
         return response([
             'data' => new TaskResource($task)
-        ], 201);
+        ], Response::HTTP_CREATED);
     }
 
     /**
@@ -67,7 +72,7 @@ class TaskController extends Controller
 
         return response([
             'data' => new TaskResource($task)
-        ], 201);
+        ], Response::HTTP_CREATED);
     }
 
     /**
@@ -80,6 +85,6 @@ class TaskController extends Controller
     {
         $task->delete();
 
-        return response(null, 204);
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }
