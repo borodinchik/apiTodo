@@ -1,6 +1,8 @@
 <?php
 namespace App\Exceptions;
 use Illuminate\Http\Response;
+use Psy\Exception\FatalErrorException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -18,6 +20,9 @@ trait ExceptionTrait
 
             case $this->isHttp($exception):
                 return $this->httpResponse($exception);
+
+//            case $this->isServer($exception):
+//                return $this->ServerResponse($exception);
 
             case $this->isTokenJWT($exception):
                 return $this->JWTResponse($exception);
@@ -40,8 +45,14 @@ trait ExceptionTrait
     protected function isHttp($exception)
     {
         return $exception instanceof NotFoundHttpException;
-//        return $exception instanceof \HttpException;
+//        return $exception instanceof HttpException;
     }
+
+//    protected function isServer($exception)
+//    {
+//        return $exception instanceof FatalErrorException;
+//
+//    }
 
     protected function isTokenInvalid($exception)
     {
@@ -58,7 +69,6 @@ trait ExceptionTrait
         return $exception instanceof JWTException;
     }
 
-
     /*Response Function*/
     protected function modelResponse($exception)
     {
@@ -73,6 +83,13 @@ trait ExceptionTrait
             'error' => 'Incorrect route'
         ],Response::HTTP_NOT_FOUND);
     }
+
+//    protected function ServerResponse($exception)
+//    {
+//        return response()->json([
+//            'error' => 'Internal Server Error'
+//        ],Response::HTTP_INTERNAL_SERVER_ERROR);
+//    }
 
     protected function TokenInvalidResponse($exception)
     {

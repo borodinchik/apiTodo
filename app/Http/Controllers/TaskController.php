@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\TasksNotBelongsToUser;
 use App\Http\Resources\TaskCollection;
 use App\Http\Resources\TaskResource;
 use App\Http\Requests\TaskRequest;
 
-use Illuminate\Http\Request;
-
 use App\Task;
-use Auth;
 use Illuminate\Http\Response;
 
 class TaskController extends Controller
@@ -25,9 +21,11 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Task $task)
     {
-        return TaskCollection::collection(Task::paginate(20));
+        return response([
+            'data' => TaskCollection::collection($task->paginate(20))
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -56,7 +54,9 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        return new TaskResource($task);
+        return response([
+            'data' => new TaskResource($task)
+        ], Response::HTTP_OK);
     }
 
     /**
