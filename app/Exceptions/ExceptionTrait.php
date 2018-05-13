@@ -21,9 +21,6 @@ trait ExceptionTrait
             case $this->isHttp($exception):
                 return $this->httpResponse($exception);
 
-//            case $this->isServer($exception):
-//                return $this->ServerResponse($exception);
-
             case $this->isTokenJWT($exception):
                 return $this->JWTResponse($exception);
 
@@ -32,10 +29,10 @@ trait ExceptionTrait
 
             case $this->isTokenExpired($exception):
                 return $this->TokenExpiredResponse($exception);
-
         }
-                return parent::render($request, $exception);
+        return parent::render($request, $exception);
     }
+
 /*Exception function*/
     protected function isModel($exception)
     {
@@ -45,14 +42,7 @@ trait ExceptionTrait
     protected function isHttp($exception)
     {
         return $exception instanceof NotFoundHttpException;
-//        return $exception instanceof HttpException;
     }
-
-//    protected function isServer($exception)
-//    {
-//        return $exception instanceof FatalErrorException;
-//
-//    }
 
     protected function isTokenInvalid($exception)
     {
@@ -83,13 +73,6 @@ trait ExceptionTrait
             'error' => 'Incorrect route'
         ],Response::HTTP_NOT_FOUND);
     }
-
-//    protected function ServerResponse($exception)
-//    {
-//        return response()->json([
-//            'error' => 'Internal Server Error'
-//        ],Response::HTTP_INTERNAL_SERVER_ERROR);
-//    }
 
     protected function TokenInvalidResponse($exception)
     {
