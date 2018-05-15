@@ -21,11 +21,12 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Task $task)
+    public function index()
     {
-        return response([
-            'data' => TaskCollection::collection($task->paginate(20))
-        ], Response::HTTP_OK);
+        return TaskCollection::collection(Task::paginate(20));
+//        return response([
+//            'data' => TaskCollection::collection(Task::paginate(20))
+//        ], Response::HTTP_OK);
     }
 
     /**

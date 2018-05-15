@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Task;
 use Tests\TestCase;
 use App\User;
 
@@ -31,12 +32,13 @@ class ApiTest extends TestCase
     function test_get_task_haw_id()
     {
         $user = factory(User::class)->create();
+        $task = factory(Task::class)->create();
 
         $response = $this->actingAs($user)
             ->withHeaders([
             'Accept' => 'application/json',
             'Content-type'=> 'application/json'
-        ])->get('/api/task/' . $user->id);
+        ])->get('/api/task/' . $task->id);
 
         $response->assertStatus(200);
     }
@@ -62,6 +64,8 @@ class ApiTest extends TestCase
     function test_update_tasks()
     {
         $user = factory(User::class)->create();
+        $task = factory(Task::class)->create();
+
 
         $data = [
             'title' => 'New title',
@@ -72,7 +76,7 @@ class ApiTest extends TestCase
             ->withHeaders([
         'Accept' => 'application/json',
         'Content-type'=> 'application/json'
-        ])->json('PUT', '/api/task/' . $user->id, $data);
+        ])->json('PUT', '/api/task/' . $task->id, $data);
 
         $response->assertStatus(201);
 
@@ -81,12 +85,13 @@ class ApiTest extends TestCase
     function test_destroy_tasks()
     {
         $user = factory(User::class)->create();
+        $task = factory(Task::class)->create();
 
         $response = $this->actingAs($user)
             ->withHeaders([
             'Accept' => 'application/json',
             'Content-type'=> 'application/json'
-        ])->json('DELETE', '/api/task/' . $user->id);
+        ])->json('DELETE', '/api/task/' . $task->id);
 
         $response->assertStatus(204);
     }
