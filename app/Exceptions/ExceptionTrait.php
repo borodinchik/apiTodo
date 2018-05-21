@@ -1,11 +1,9 @@
 <?php
 namespace App\Exceptions;
+
 use Illuminate\Http\Response;
-use Psy\Exception\FatalErrorException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -59,7 +57,7 @@ trait ExceptionTrait
         return $exception instanceof JWTException;
     }
 
-    /*Response Function*/
+   /*Response Function*/
     protected function modelResponse($exception)
     {
         return response()->json([
