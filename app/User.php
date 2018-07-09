@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Notifications\NewUserRegistered;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 use Laravel\Passport\HasApiTokens;
@@ -11,6 +12,16 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
+
+    protected static function boot()
+    {
+        parent::boot();
+        self::created(function($model)
+        {
+            $model->notify(new NewUserRegistered());
+        });
+
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -55,5 +66,10 @@ class User extends Authenticatable implements JWTSubject
     public function tasks()
     {
         $this->hasMany(Task::class);
+    }
+
+    public function routeNotificationFor($driver)
+    {
+        return 'https://hooks.slack.com/services/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';
     }
 }
