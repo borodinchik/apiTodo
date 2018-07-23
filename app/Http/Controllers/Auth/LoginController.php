@@ -59,6 +59,6 @@ class LoginController extends Controller
     {
         $user = Socialite::driver('facebook')->user();
 
-         return $user->token;
+         return $user->name;
     }
 }
