@@ -35,4 +35,11 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'facebook' => [
+        'client_id' => '190649808254613',
+        'client_secret' => '42a6c6161b5d032882e5785d76c00576',
+        'redirect' => 'https://stark-falls-94610.herokuapp.com/api/auth/facebook/callback',
+    ],
+
 ];
+    

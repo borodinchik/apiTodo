@@ -28,3 +28,8 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('payload', 'AuthController@payload');
 });
     Route::post('register_user', 'AuthController@register');
+/*
+ * Social route
+ */
+    Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider');
+    Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');
