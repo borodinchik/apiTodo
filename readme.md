@@ -92,9 +92,11 @@ Use JWT:
 
   * api/task/id - method:get tasks with unique id
 
-  * api/task - method:post create new tasks
+  * api/task - method:post create new tasks data : { title: '', description: '' }, header: token
 
   * api/task/id - method:update tasks with unique id
 
   * api/task/id - method:destroy tasks with unique id
+
+
   
