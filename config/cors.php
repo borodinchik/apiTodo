@@ -15,7 +15,7 @@ return [
     'supportsCredentials' => false,
     'allowedOrigins' => ['http://localhost:3000/'],
     'allowedOriginsPatterns' => [],
-    'allowedHeaders' => ['Content-Type', 'Accept'],
+    'allowedHeaders' => ['*'],
     'allowedMethods' => ['*'],
     'exposedHeaders' => [],
     'maxAge' => 0,
