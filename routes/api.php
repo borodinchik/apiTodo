@@ -35,6 +35,10 @@ Route::group(['prefix' => 'auth'], function () {
 
 
 Route::group(['middleware' => ['web']], function () {
+    //facebook
     Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider');
     Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');
+    //Twitter
+    Route::get('auth/twitter', 'Auth\LoginController@redirectToTwitterProvider');
+    Route::get('auth/twitter/callback', 'Auth\LoginController@handleProviderTwitterCallback');
 });
