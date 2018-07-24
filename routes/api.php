@@ -32,8 +32,6 @@ Route::group(['prefix' => 'auth'], function () {
 /*
 * Social route
 */
-
-
 Route::group(['middleware' => ['web']], function () {
     //facebook
     Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider');
