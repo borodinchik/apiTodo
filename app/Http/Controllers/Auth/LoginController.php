@@ -62,4 +62,9 @@ class LoginController extends Controller
 
          return $user->name;
     }
+
+    public function in()
+    {
+         echo '1';
+    }
 }
