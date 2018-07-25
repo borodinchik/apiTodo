@@ -32,7 +32,7 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(TaskRequest $request)
@@ -50,7 +50,7 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Task  $task
+     * @param  \App\Task $task
      * @return \Illuminate\Http\Response
      */
     public function show(Task $task)
@@ -63,8 +63,8 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Task  $task
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Task $task
      * @return \Illuminate\Http\Response
      */
     public function update(TaskRequest $request, Task $task)
@@ -79,7 +79,7 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Task  $task
+     * @param  \App\Task $task
      * @return \Illuminate\Http\Response
      */
     public function destroy(Task $task)
@@ -89,10 +89,4 @@ class TaskController extends Controller
         return response(null, Response::HTTP_NO_CONTENT);
     }
 
-    public function getTasksAndComments($id)
-    {
-        $taskComments = Task::with(['comments'])->where('id', $id)->first();
-        dd($taskComments);
-        return $taskComments;
-    }
 }
