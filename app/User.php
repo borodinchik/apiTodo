@@ -63,13 +63,18 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+    public function routeNotificationFor($driver)
+    {
+        return 'https://hooks.slack.com/services/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';
+    }
+
     public function tasks()
     {
         return $this->hasMany(Task::class);
     }
 
-    public function routeNotificationFor($driver)
+    public function comments()
     {
-        return 'https://hooks.slack.com/services/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';
+        return $this->hasMany(Comment::class);
     }
 }
