@@ -12,7 +12,6 @@ $factory->define(Task::class, function (Faker $faker) {
         'user_id' => function()
         {
             return User::all()->random();
-        },
-        'status_id' => 0
+        }
     ];
 });

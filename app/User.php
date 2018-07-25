@@ -65,7 +65,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function tasks()
     {
-        $this->hasMany(Task::class);
+        return $this->hasMany(Task::class);
     }
 
     public function routeNotificationFor($driver)
