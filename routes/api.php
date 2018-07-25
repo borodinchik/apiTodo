@@ -29,6 +29,8 @@ Route::group(['prefix' => 'auth'], function () {
 });
     Route::post('register_user', 'AuthController@register');
 
+    Route::get('/all_comments', 'CommentsController@getAllComments');
+
 /*
 * Social route
 */
