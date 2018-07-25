@@ -38,6 +38,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('auth/facebook', 'AuthController@redirectToProvider');
     Route::get('auth/facebook/callback', 'AuthController@handleProviderCallback');
     //Twitter
-//    Route::get('auth/twitter', 'Auth\LoginController@redirectToTwitterProvider');
-//    Route::get('auth/twitter/callback', 'Auth\LoginController@handleProviderTwitterCallback');
+    Route::get('auth/twitter', 'Auth\LoginController@redirectToTwitterProvider');
+    Route::get('auth/twitter/callback', 'Auth\LoginController@handleProviderTwitterCallback');
 });
