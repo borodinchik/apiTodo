@@ -91,7 +91,7 @@ class TaskController extends Controller
 
     public function getTasksAndComments(Task $task)
     {
-        $taskComments = Task::with('comments')->where('id', $task->id)->first();
+        $taskComments = Task::with(['comments'])->where('id', $task->id)->first();
         dd($taskComments);
         return $taskComments;
     }
