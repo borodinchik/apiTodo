@@ -37,8 +37,8 @@ Route::group(['prefix' => 'auth'], function () {
 */
 Route::group(['middleware' => ['web']], function () {
     //facebook
-    Route::get('auth/facebook', 'Auth\AuthController@redirectToProvider');
-    Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback');
+    Route::get('auth/facebook', 'AuthController@redirectToProvider');
+    Route::get('auth/facebook/callback', 'AuthController@handleProviderCallback');
     //Twitter
 //    Route::get('auth/twitter', 'Auth\LoginController@redirectToTwitterProvider');
 //    Route::get('auth/twitter/callback', 'Auth\LoginController@handleProviderTwitterCallback');
