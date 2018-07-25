@@ -19,3 +19,4 @@
 
 //Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/all_comments', 'CommentsController@getAllComments');
