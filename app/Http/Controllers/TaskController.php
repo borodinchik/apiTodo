@@ -89,10 +89,10 @@ class TaskController extends Controller
         return response(null, Response::HTTP_NO_CONTENT);
     }
 
-    public function getTasksAndComments(Task $task)
+    public function getTasksAndComments($id)
     {
         dd($task->id);
-        $taskComments = Task::with(['comments'])->where('id', $task->id)->first();
+        $taskComments = Task::with(['comments'])->where('id', $id)->first();
         dd($taskComments);
         return $taskComments;
     }
