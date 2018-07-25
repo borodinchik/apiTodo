@@ -30,16 +30,16 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('register_user', 'AuthController@register');
 
     Route::get('/all_comments', 'CommentsController@getAllComments');
-    Route::get('get', 'Auth\LoginController@in');
+
 
 /*
 * Social route
 */
 Route::group(['middleware' => ['web']], function () {
     //facebook
-    Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider');
-    Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');
+    Route::get('auth/facebook', 'Auth\AuthController@redirectToProvider');
+    Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback');
     //Twitter
-    Route::get('auth/twitter', 'Auth\LoginController@redirectToTwitterProvider');
-    Route::get('auth/twitter/callback', 'Auth\LoginController@handleProviderTwitterCallback');
+//    Route::get('auth/twitter', 'Auth\LoginController@redirectToTwitterProvider');
+//    Route::get('auth/twitter/callback', 'Auth\LoginController@handleProviderTwitterCallback');
 });
