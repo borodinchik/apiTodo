@@ -29,7 +29,7 @@ Route::group(['prefix' => 'auth'], function () {
 });
     Route::post('register_user', 'AuthController@register');
 
-    Route::get('/task_comments', 'TaskController@getTasksAndComments');
+    Route::get('/task_comments/{id}', 'TaskController@getTasksAndComments');
 
 
 /*
