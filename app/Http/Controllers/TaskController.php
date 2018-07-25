@@ -13,7 +13,7 @@ class TaskController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+//        $this->middleware('auth:api');
     }
 
     /**
@@ -87,5 +87,12 @@ class TaskController extends Controller
         $task->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function getTasksAndComments(Task $task)
+    {
+        $taskComments = Task::with('comments')->where('id', $task->id)->first();
+        
+        return $taskComments;
     }
 }
