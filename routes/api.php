@@ -30,7 +30,7 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('register_user', 'AuthController@register');
 
     Route::get('/all_comments', 'CommentsController@getAllComments');
-    Route::get('/get', 'Auth\LoginController@in');
+    Route::get('get', 'Auth\LoginController@in');
 
 /*
 * Social route
