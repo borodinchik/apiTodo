@@ -47,5 +47,10 @@ return [
         'redirect' => 'https://stark-falls-94610.herokuapp.com/api/auth/google/callback',
     ],
 
+    'twitter' => [
+        'client_id' => '1xacRIuYvItv15y5MzvtyK0uc',
+        'client_secret' => 'SOjKLuZGfOllynOwtrdnK4C9JGdjVzQdPuF1Xtqpkya0yuuHtt',
+        'redirect' => 'https://stark-falls-94610.herokuapp.com/api/auth/twitter/callback',
+    ],
 ];
     
