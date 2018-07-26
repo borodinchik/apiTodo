@@ -22,7 +22,7 @@ class AuthController extends Controller
 //        $this->middleware('jwt', ['except' => ['login', 'register']]);
     }
 
-    public  function register(UserRequest $request)
+    public function register(UserRequest $request)
     {
         $user = new User;
         $user->name = $request->name;
@@ -43,8 +43,8 @@ class AuthController extends Controller
     public function login()
     {
         $credentials = request(['email', 'password']);
-    
-        if (! $token = auth()->attempt($credentials)) {
+
+        if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -121,8 +121,16 @@ class AuthController extends Controller
      */
     public function handleProviderCallback()
     {
-        $user = Socialite::driver('facebook')->user();
+        $user = Socialite::driver('facebook')->stateless()->user();
 
-        return $user->name;
+        $newSocialUser = new User();
+        $newSocialUser->name = $user->name;
+        $newSocialUser->social_id = $user->id;
+        $newSocialUser->email = $user->email ? $user->email : null;
+        $newSocialUser->password = null;
+        $newSocialUser->provider = 'facebook';
+        $newSocialUser->save();
+
+        dd($newSocialUser);
     }
 }
