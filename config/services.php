@@ -42,8 +42,8 @@ return [
     ],
 
     'google' => [
-        'client_id' => '285682552166408',
-        'client_secret' => 'dc982406f50d758108be68ebe6df3932',
+        'client_id' => '685275255567-gkaes3i6am1sec3vcrt3p62q1lasteli.apps.googleusercontent.com',
+        'client_secret' => 'pykEvKVYQ1pH3n1eYC2gBGMA',
         'redirect' => 'https://stark-falls-94610.herokuapp.com/api/auth/google/callback',
     ],
 
