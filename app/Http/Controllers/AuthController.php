@@ -105,13 +105,13 @@ class AuthController extends Controller
     }
 
     /**
-     * Redirect the user to the GitHub authentication page.
+     * Redirect the user to the Facebook authentication page.
      *
      * @return Response
      */
-    public function redirectToProvider()
+    public function redirectToProvider($provider)
     {
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver($provider)->redirect();
     }
 
     /**
@@ -119,17 +119,22 @@ class AuthController extends Controller
      *
      * @return Response facebook
      */
-    public function handleProviderCallback()
+    public function handleProviderCallback($provider)
     {
-        $user = Socialite::driver('facebook')->stateless()->user();
+        if ($provider == 'facebook')
+        {
+            $user = Socialite::driver($provider)->stateless()->user();
+        }else{
+            $user = Socialite::driver($provider)->user();
+        }
 
-        $newSocialUser = new User();
-        $newSocialUser->name = $user->name;
-        $newSocialUser->social_id = $user->id;
-        $newSocialUser->email = $user->email ? $user->email : null;
-        $newSocialUser->password = null;
-        $newSocialUser->provider = 'facebook';
-        $newSocialUser->save();
+        $SocialUser = new User();
+        $SocialUser->name = $user->name;
+        $SocialUser->social_id = $user->id;
+        $SocialUser->email = $user->email ? $user->email : null;
+        $SocialUser->password = null;
+        $SocialUser->provider = $provider;
+        $SocialUser->save();
 
         return redirect('/');
     }

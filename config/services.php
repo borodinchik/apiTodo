@@ -41,5 +41,11 @@ return [
         'redirect' => 'https://stark-falls-94610.herokuapp.com/api/auth/facebook/callback',
     ],
 
+    'google' => [
+        'client_id' => '285682552166408',
+        'client_secret' => 'dc982406f50d758108be68ebe6df3932',
+        'redirect' => 'https://stark-falls-94610.herokuapp.com/api/auth/google/callback',
+    ],
+
 ];
     

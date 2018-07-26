@@ -31,13 +31,10 @@ Route::group(['prefix' => 'auth'], function () {
 
 
 /*
-* Social route
+* Social route , Facebook , Google , Github, Twitter
 */
 Route::group(['middleware' => ['web']], function () {
-    //facebook
-    Route::get('auth/facebook', 'AuthController@redirectToProvider');
-    Route::get('auth/facebook/callback', 'AuthController@handleProviderCallback');
-    //Twitter
-    Route::get('auth/twitter', 'Auth\LoginController@redirectToTwitterProvider');
-    Route::get('auth/twitter/callback', 'Auth\LoginController@handleProviderTwitterCallback');
+    Route::get('auth/{provider}', 'AuthController@redirectToProvider');
+    Route::get('auth/{provider}/callback', 'AuthController@handleProviderCallback');
 });
+   
