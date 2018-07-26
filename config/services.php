@@ -36,9 +36,9 @@ return [
     ],
 
     'facebook' => [
-        'client_id' => '243594723131877',
-        'client_secret' => 'bf5618ec696269adea000d498d0659e0',
-        'redirect' => 'http://localhost:8000/api/auth/facebook/callback',
+        'client_id' => '285682552166408',
+        'client_secret' => 'dc982406f50d758108be68ebe6df3932',
+        'redirect' => 'https://stark-falls-94610.herokuapp.com/api/auth/facebook/callback',
     ],
 
 ];
