@@ -131,6 +131,6 @@ class AuthController extends Controller
         $newSocialUser->provider = 'facebook';
         $newSocialUser->save();
 
-        dd($newSocialUser);
+        return redirect('/');
     }
 }
