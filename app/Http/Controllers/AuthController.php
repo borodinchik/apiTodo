@@ -137,7 +137,7 @@ class AuthController extends Controller
         $SocialUser->provider = $provider;
         $SocialUser->save();
 
-        if (!$token = JWTAuth::fromeUser($SocialUser))
+        if (!$token = JWTAuth::fromUser($SocialUser))
         {
             return response()->json([
                 'error' => 'Unauthorized'
