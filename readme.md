@@ -83,9 +83,26 @@ Now we need migrating and seeding databases:
   
 Use JWT:
 
-   * php artisan jwt:secret  
+   * php artisan jwt:secret
 
-  
+#Route with register new user
+
+    api/register_user
+
+#Route login with facebook, twitter , google
+
+    * api/auth/facebook
+    * api/auth/google
+    * api/auth/twitter
+
+#JWT Route
+
+    * api/login - login user ( get token for use api ),
+    * api/logout - logout user with api
+    * api/refresh - change old token that new one
+    * api/me - return User object
+    * api/payload - return User payload object
+
 #Route with task
 
   * api/task - method:get all tasks

@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Laravel\Socialite\Facades\Socialite;
+use JWTAuth;
 
 
 class AuthController extends Controller
@@ -136,6 +137,12 @@ class AuthController extends Controller
         $SocialUser->provider = $provider;
         $SocialUser->save();
 
-        return redirect('/');
+        if (!$token = JWTAuth::fromeUser($SocialUser))
+        {
+            return response()->json([
+                'error' => 'Unauthorized'
+            ], 401);
+        }
+        return $this->respondWithToken($token);
     }
 }

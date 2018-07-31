@@ -31,7 +31,7 @@ Route::group(['prefix' => 'auth'], function () {
 
 
 /*
-* Social route , Facebook , Google , Github, Twitter
+* Social route , Facebook , Google , Twitter
 */
 Route::group(['middleware' => ['web']], function () {
     Route::get('auth/{provider}', 'AuthController@redirectToProvider');
