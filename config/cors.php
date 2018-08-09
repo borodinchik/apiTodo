@@ -13,7 +13,7 @@ return [
     */
    
     'supportsCredentials' => false,
-    'allowedOrigins' => ['http://localhost:3000'],
+    'allowedOrigins' => ['*'],
     'allowedHeaders' => ['Content-Type', 'Authorization', 'Accept'],
     'allowedMethods' => ['GET', 'POST', 'PUT', 'DELETE'],
     'exposedHeaders' => [],
